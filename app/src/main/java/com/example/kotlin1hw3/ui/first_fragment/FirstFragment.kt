@@ -1,0 +1,49 @@
+package com.example.kotlin1hw3.ui.first_fragment
+
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
+import com.example.kotlin1hw3.R
+import com.example.kotlin1hw3.ui.view_model.MainViewModel
+import kotlinx.android.synthetic.main.fragment_first.*
+
+
+class FirstFragment : Fragment() {
+
+    private val viewModel: MainViewModel by lazy {
+        ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_first, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        initClickPlus()
+        initClickMinus()
+    }
+
+    private fun initClickMinus() {
+        btn_minus.setOnClickListener {
+            viewModel.onMinusClick()
+        }
+    }
+
+    private fun initClickPlus() {
+        btn_plus.setOnClickListener {
+            viewModel.onPlusClick()
+        }
+    }
+
+    companion object {
+        fun newInstance() = FirstFragment()
+    }
+}
